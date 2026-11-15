@@ -34,43 +34,6 @@
     "reference"
   ],
   "orientation": "any",
-  "screenshots": [
-    {
-      "src": "store/phone-home.jpg",
-      "sizes": "780x1688",
-      "type": "image/jpeg",
-      "form_factor": "narrow",
-      "label": "الصفحة الرئيسية"
-    },
-    {
-      "src": "store/phone-mushaf.jpg",
-      "sizes": "780x1688",
-      "type": "image/jpeg",
-      "form_factor": "narrow",
-      "label": "القرآن الكريم"
-    },
-    {
-      "src": "store/phone-prayer.jpg",
-      "sizes": "780x1688",
-      "type": "image/jpeg",
-      "form_factor": "narrow",
-      "label": "مواقيت الصلاة"
-    },
-    {
-      "src": "store/desktop-home.jpg",
-      "sizes": "1920x1080",
-      "type": "image/jpeg",
-      "form_factor": "wide",
-      "label": "الصفحة الرئيسية على الكمبيوتر"
-    },
-    {
-      "src": "store/desktop-mushaf.jpg",
-      "sizes": "1920x1080",
-      "type": "image/jpeg",
-      "form_factor": "wide",
-      "label": "القرآن الكريم على الكمبيوتر"
-    }
-  ],
   "shortcuts": [
     {
       "name": "القرآن الكريم",
