@@ -3603,7 +3603,11 @@ function instTopShow() {
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; lsSet('installed', null); instTopShow(); });
 window.addEventListener('appinstalled', () => { installEvt = null; lsSet('installed', '1'); instTopShow(); toast(`ثُبّت ${BRAND} على جهازك، وتجده بين تطبيقاتك`); offlinePack(); });
 async function installApp() {
-  if (installEvt) { const e = installEvt; e.prompt(); const r = await e.userChoice.catch(() => null); if (r && r.outcome === 'accepted') { installEvt = null; lsSet('installed', '1'); instTopShow(); offlinePack(); } return; }
+  /* حدث التثبيت يُستعمل مرة واحدة فقط: بعد استدعاء prompt() يصبح غير صالح (يرمي InvalidStateError عند إعادته فلا يحدث شيء). لذلك نُسقطه فوراً، وإن رفض المستخدم النافذة أو فشلت نعرض الخطوات اليدوية بدل الصمت */
+  if (installEvt) {
+    const e = installEvt; installEvt = null; instTopShow();
+    try { await e.prompt(); const r = await e.userChoice; if (r && r.outcome === 'accepted') { lsSet('installed', '1'); instTopShow(); offlinePack(); return; } } catch (err) {}
+  }
   const ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1), android = /Android/.test(ua);
   const safariMac = !ios && /Macintosh/.test(ua) && /Safari/.test(ua) && !/Chrome|Chromium|Edg|Firefox/.test(ua), firefox = /Firefox|FxiOS/.test(ua), iosOther = ios && /CriOS|FxiOS|EdgiOS|GSA\//.test(ua);
   const step = (k, t) => `<li><span class="in-n">${n(k)}</span><span>${t}</span></li>`;
@@ -3616,6 +3620,7 @@ async function installApp() {
   const others = [ios_, and_, pc_, mac_].filter(x => x !== first).join('');
   openDrawer(`<div class="stack instsheet"><div class="in-head"><img src="icons/icon-192.png" alt="" width="64" height="64"><div><h2>ثبّت ${BRAND} على جهازك</h2><p class="muted small" style="margin:0">أيقونة على الشاشة تفتح التطبيق مباشرة في نافذته الخاصة، ويعمل كاملاً دون إنترنت بعد التثبيت. التثبيت مجاني ولا يحتاج إلى متجر.</p></div></div>
     ${iosOther ? '<p class="note">على آيفون يتم التثبيت من متصفح سفاري. انسخ الرابط وافتحه في سفاري، ثم اتبع الخطوات.</p>' : ''}
+    ${android && !firefox ? '<p class="note">إن لم تظهر نافذة التثبيت تلقائياً فسبب ذلك أن كروم يؤجلها بعد إغلاقها مرة سابقة. اتبع الخطوات أدناه فهي تعمل دائماً.</p>' : ''}
     ${firefox && !ios ? '<p class="note">متصفح فايرفوكس لا يدعم تثبيت التطبيقات على الكمبيوتر. افتح الموقع في كروم أو إيدج ثم اضغط زر التثبيت.</p>' : ''}
     ${first}<details class="in-more"><summary>طريقة التثبيت على الأجهزة الأخرى</summary>${others}</details></div>`);
 }
