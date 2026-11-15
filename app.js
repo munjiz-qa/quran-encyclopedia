@@ -5478,5 +5478,6 @@ const i18nReady = i18nInit().catch(() => {});
 if (IS_PWA && 'serviceWorker' in navigator && !FILE_MODE) {
   const hadSW = !!navigator.serviceWorker.controller; let swReloaded = false;
   navigator.serviceWorker.addEventListener('controllerchange', () => { if (!hadSW || swReloaded) return; swReloaded = true; location.reload(); });
-  navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(reg => { const up = () => reg.update().catch(() => {}); document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') up(); }); setInterval(up, 30 * 60 * 1000); }).catch(() => {});
+  navigator.serviceWorker.addEventListener('message', ev => { if (ev.data && ev.data.type === 'qenc-updated') { if (performance.now() < 12000 && !audio) location.reload(); else toast('يتوفر تحديث جديد، يُطبَّق عند فتح التطبيق مرة أخرى'); } });
+  navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(reg => { const up = () => reg.update().catch(() => {}); up(); document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') up(); }); setInterval(up, 30 * 60 * 1000); }).catch(() => {});
 }
