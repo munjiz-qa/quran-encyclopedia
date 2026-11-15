@@ -1,8 +1,8 @@
 # موسوعة القرآن الكريم — The Holy Quran Encyclopedia
 
-دائرة معارف قرآنية مستقلة: القرآن الكريم بخط مجمع الملك فهد، وثمانية تفاسير، وعلوم القرآن، وموضوعات مفهرسة في ثمانية أبواب، وفهرس هجائي، وبحث بالمعنى، وحفظ وتلاوة، ومواقيت الصلاة والأذكار. تعمل دون إنترنت بعد التثبيت.
+دائرة معارف قرآنية مستقلة: القرآن الكريم بخط مجمع الملك فهد، وثمانية تفاسير، وعلوم القرآن، وموضوعات مفهرسة في أبواب، وفهرس هجائي، وبحث بالمعنى، وحفظ وتلاوة، ومواقيت الصلاة والأذكار. تعمل دون إنترنت بعد التثبيت.
 
-A standalone Quranic encyclopedia: the Holy Quran in the King Fahd Complex script, eight tafsir works, Quranic sciences, topics organised into eight gates, an alphabetical index, search by meaning, memorization, recitation, prayer times and remembrances. Works offline once installed.
+A standalone Quranic encyclopedia: the Holy Quran in the King Fahd Complex script, eight tafsir works, Quranic sciences, topics organised into gates, an alphabetical index, search by meaning, memorization, recitation, prayer times and remembrances. Works offline once installed.
 
 ## التشغيل المحلي
 
